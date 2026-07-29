@@ -5,9 +5,9 @@
 
 #include "map.h"
 
-void PrintAtMap(int coord[2], char symbol[2]) {
-    mvaddch(2 + coord[0], 2 * coord[1] + 78, symbol[0]);
-    mvaddch(2 + coord[0], 2 * coord[1] + 78 + 1, symbol[1]);
+void PrintAtMap(int y, int x, char symbol[2]) { 
+    mvaddch(2 + y, 2 * x + 78, symbol[0]);
+    mvaddch(2 + y, 2 * x + 78 + 1, symbol[1]);
 }
 
 
@@ -17,7 +17,7 @@ void EmptyMap(Map *map) {
     for (int i = 0; i < (sizeof(map->arr) / sizeof(map->arr[0])); ++i) {
 	for (int j = 0; j < (sizeof(map->arr) / sizeof(map->arr[0])); ++j) {
 	    
-	    map->arr[i][j] = M_EMPTY;
+	    map->arr[i][j] = M_EMPTY; // HACK This should actually be empty once the map is generated
 	}
     }
 }
@@ -38,7 +38,7 @@ void GenerateMap(Map *map, int multiplier) {
     
 
 
-    refresh();
+    refresh(); // TODO remove
 
     // TODO block off inaccessable
 }
@@ -56,6 +56,10 @@ void PrintMap(Map map) { // FIXME This is a horrible system and needs an entity 
     for (int i = 0; i < (sizeof(map.arr) / sizeof(map.arr[0])); ++i) {
 	for (int j = 0; j < (sizeof(map.arr) / sizeof(map.arr[0])); ++j) {
 	    switch (map.arr[i][j]) {
+	    case M_PATH:
+		mvaddch(y, x++, ' ');
+		mvaddch(y, x++, ' ');
+		break;
 	    case M_EMPTY:
 		mvaddch(y, x++, '[');
 		mvaddch(y, x++, ']');
@@ -72,7 +76,7 @@ void PrintMap(Map map) { // FIXME This is a horrible system and needs an entity 
 	++y;
 	x = 78; // FIXME Don't make this a magic number
     }
-    
+
     refresh();
     
 }

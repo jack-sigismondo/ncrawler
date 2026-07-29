@@ -2,11 +2,6 @@
 #define GRAPHICS_H
 
 
-
-    
-
-
-
 typedef struct Graphic {
   int size_y;
   int size_x;
@@ -26,6 +21,15 @@ extern Graphic gleft_forewall;
 
 extern Graphic gright_wall;
 extern Graphic gright_forewall;
-void LoadGrahics();
+
+extern Graphic gwallface;
+extern Graphic gwall; // Print as left-forewall
+extern Graphic gforewall;
+
+
+extern Graphic gright_corner_wall;
+extern Graphic gleft_corner_wall;
+
+void LoadGraphics();
 
 #endif // GRAPHICS_H

@@ -21,17 +21,17 @@ typedef enum MapCode {
     M_STRONG_enemy,
     M_STAIRS,
     M_POI,
-    // TODO Maybe add lootcodes?
+    // TODO 
 } MapCode;
 
 typedef struct Map {
     int size_y;
     int size_x;
-    int arr[20][20];
+    int arr[20][20]; // This could also hold entities.
     // TODO Needs loot
 } Map;
 
-void PrintAtMap(int coord[2], char symbol[2]);
+void PrintAtMap(int y, int x, char symbol[2]);
 
 // Really can get rid of this after I understand it
 void EmptyMap(Map *map);

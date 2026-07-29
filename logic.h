@@ -10,7 +10,7 @@ typedef struct Entity {
     int type;
     char name[20];
     char description[30];
-
+    
     void *object;
 
 } Entity;
@@ -52,6 +52,7 @@ typedef struct Key { // Could maybe go on a wall
     int picked_up; // Bool
 
 } Key;
+
 
 
 // Takes a player and moves if possible, returning 1 on a success (or 0 on fail)

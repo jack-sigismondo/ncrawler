@@ -3,6 +3,7 @@
 #include <ncurses.h>
 
 #include "graphics.c"
+#include "graphics.h"
 #include "logic.h"
 #include "map.c"
 #include "ui.c"
@@ -18,6 +19,9 @@ int main(int argc, char *argv[]) {
     GenerateMap(&map, 1);
     
     Player player = CreatePlayer(0);
+
+    /* MovePlayer(&map, &player, KEY_UP); */
+
     
     /* return 0; */
     // TESTING
@@ -32,25 +36,37 @@ int main(int argc, char *argv[]) {
 
     LoadGraphics();
 
-    
-    
-
+    /* PrintMap(map); */
 
     for (;;) {
 	ch = getch();
+
+	/* PrintGraphic(gleft_wall, 1, 2); */
+
+	
+
+	PrintGraphic(gleft_corner_wall, 6, 2);
+
+
+	PrintGraphic(gwall, 6, 21);
+	
+	/* PrintGraphic(gleft_forewall, 6, 21); */
+
+	/* PrintGraphic(gforewall, 8, 26); */
+
+	/* PrintGraphic(gright_forewall, 6, 50); */
+
+	PrintGraphic(gright_corner_wall, 6, 56);
+
 	
 	
-	PrintGraphic(gleft_wall, 1, 2);
 	
-	PrintGraphic(gleft_forewall, 6, 21);
-	
-	PrintGraphic(gright_forewall, 6, 50);
-	PrintGraphic(gright_wall, 1, 56);
-	
+	//PrintGraphic(gright_wall, 1, 56);
+	/* PrintGraphic(gwallface, 1, 2); */
 
 
 	PrintBorder();
-	PrintMap(map);
+	
 
 	refresh();
 	
@@ -69,7 +85,7 @@ int main(int argc, char *argv[]) {
 	    
 	case 'q':
 	    // HACK
-	    return 0;
+	    exit(0);
 	    
 	default:
 	    continue;

@@ -20,26 +20,31 @@ Player CreatePlayer(int difficulty) {
     if (difficulty == 0) {
 	player.hp_max = 100;
 	player.hp = 100;
-	return player;
     }
     else {
 	player.hp_max = 85;
 	player.hp = 85;
-	return player;
     }
+
+    return player;
 }
 
 
 // TODO switch directions to enums and - or + to change them and rotate them
-int MovePlayer(Map *map, Player *player, char keypress) {
+int MovePlayer(Map *map, Player *player, int keypress) {
     
     switch (keypress) {
     case KEY_UP:
+
 	switch (player->direction) {
 	case 'n':
 	    if ((player->coord[0] > 0) && (map->arr[player->coord[0] - 1][player->coord[1]] == M_PATH)) {
-		player->coord[0] -= 1;
+
+		map->arr[player->coord[0]][player->coord[1]] = M_PATH;
+		map->arr[player->coord[0] - 1][player->coord[1]] = M_PLAYER;
 		
+		player->coord[0] -= 1;
+
 		return 1;
 	    }
 	    else { return 0; }
@@ -66,9 +71,9 @@ int MovePlayer(Map *map, Player *player, char keypress) {
 	    else { return 0; }
 
     case KEY_DOWN:
-	return 0; // FIXME
-	break;
 	
+
+	// TODO Transpose the map
     case KEY_LEFT:
 	switch (player->direction) {
 	case 'n': player->direction = 'w'; return 1;
@@ -87,7 +92,10 @@ int MovePlayer(Map *map, Player *player, char keypress) {
 	}
 	break;
     
-    return 0;
+    
 	}
     }
+
+    return 0;
+    
 }

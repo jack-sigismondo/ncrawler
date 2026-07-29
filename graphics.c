@@ -6,8 +6,6 @@
 // NOTE You must print from left to right
 
 
-
-
 // Take a graphic struct and print it along given y and x values
 void PrintGraphic(Graphic graphic, int y, int x) {
 
@@ -41,10 +39,25 @@ Graphic gleft_forewall;
 Graphic gright_wall;
 Graphic gright_forewall;
 
+Graphic gwallface;
+Graphic gwall;
+Graphic gforewall;
+
+Graphic gright_corner_wall;
+Graphic gleft_corner_wall;
+
 void LoadGraphics() {
     gleft_wall = LoadGraphic("left-wall.txt");
     gleft_forewall = LoadGraphic("left-forewall.txt");
     
     gright_wall = LoadGraphic("right-wall.txt");
     gright_forewall = LoadGraphic("right-forewall.txt");
+
+    gwallface = LoadGraphic("wallface.txt");
+    gwall = LoadGraphic("wall.txt");
+    gforewall = LoadGraphic("forewall.txt");
+
+    gright_corner_wall = LoadGraphic("r-corner-wall.txt");
+    gleft_corner_wall = LoadGraphic("l-corner-wall.txt");
+    
 }
