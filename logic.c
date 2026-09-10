@@ -48,6 +48,7 @@ int MovePlayer(Map *map, Player *player, int keypress) {
 		return 1;
 	    }
 	    else { return 0; }
+	    break;
 	    
 	case 'e':
 	    if ((player->coord[1] < 19) && (map->arr[player->coord[0]][player->coord[1] + 1] == M_PATH)) {
@@ -55,6 +56,7 @@ int MovePlayer(Map *map, Player *player, int keypress) {
 		return 1;
 	    }
 	    else { return 0; }
+	    break;
 	    
 	case 's':
 	    if ((player->coord[0] < 19) && (map->arr[player->coord[0] + 1][player->coord[1]] == M_PATH)) {
@@ -62,6 +64,7 @@ int MovePlayer(Map *map, Player *player, int keypress) {
 		return 1;
 	    }
 	    else { return 0; }
+	    break;
 	    
 	case 'w':
 	    if ((player->coord[1] > 0) && (map->arr[player->coord[0]][player->coord[1] - 1] == M_PATH)) {
@@ -69,26 +72,27 @@ int MovePlayer(Map *map, Player *player, int keypress) {
 		return 1;
 	    }
 	    else { return 0; }
+	    break;
 
     case KEY_DOWN:
-	
+      break;
 
 	// TODO Transpose the map
     case KEY_LEFT:
 	switch (player->direction) {
-	case 'n': player->direction = 'w'; return 1;
-	case 'e': player->direction = 'n'; return 1;
-	case 's': player->direction = 'e'; return 1;
-	case 'w': player->direction = 's'; return 1;
+	case 'n': player->direction = 'w'; return 1; break;
+	case 'e': player->direction = 'n'; return 1; break;
+	case 's': player->direction = 'e'; return 1; break;
+	case 'w': player->direction = 's'; return 1; break;
 	}
 	break;
 	
     case KEY_RIGHT:
 	switch (player->direction) {
-	case 'n': player->direction = 'e'; return 1;
-	case 'e': player->direction = 's'; return 1;
-	case 's': player->direction = 'w'; return 1;
-	case 'w': player->direction = 'n'; return 1;
+	case 'n': player->direction = 'e'; return 1; break;
+	case 'e': player->direction = 's'; return 1; break;
+	case 's': player->direction = 'w'; return 1; break;
+	case 'w': player->direction = 'n'; return 1; break;
 	}
 	break;
     

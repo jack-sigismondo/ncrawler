@@ -2,12 +2,18 @@
 #include <stdio.h>
 #include <ncurses.h>
 
+
+// Framework
 #include "graphics.c"
 #include "graphics.h"
 #include "logic.h"
 #include "map.c"
 #include "ui.c"
 #include "logic.c"
+
+// Minigames
+#include "arrow.c"
+
 
 int main(int argc, char *argv[]) {
     printf("Beginning of program.");
@@ -27,36 +33,36 @@ int main(int argc, char *argv[]) {
     // TESTING
     
     // ncurses initialization
-    int ch;
+    int ch = 'u';
     initscr();
     raw();
     cbreak();  
     keypad(stdscr, TRUE);
+    nonl(); // TODO What does this do?
     noecho();
 
-    LoadGraphics();
-
-    /* PrintMap(map); */
+    /* LoadGraphics(); */ // TODO DELETE
+    
 
     for (;;) {
 	ch = getch();
 
-	/* PrintGraphic(gleft_wall, 1, 2); */
+	/* PrintGraphic(1, 2, "left-wall.txt"); */
 
+	/* PrintGraphic(6, 21, "left-forewall.txt"); */
+
+	/* PrintGraphic(gleft_corner_wall, 6, 2); */
+
+
+	/* PrintGraphic(gwall, 6, 21); */
 	
-
-	PrintGraphic(gleft_corner_wall, 6, 2);
-
-
-	PrintGraphic(gwall, 6, 21);
 	
-	/* PrintGraphic(gleft_forewall, 6, 21); */
 
 	/* PrintGraphic(gforewall, 8, 26); */
 
 	/* PrintGraphic(gright_forewall, 6, 50); */
 
-	PrintGraphic(gright_corner_wall, 6, 56);
+	/* PrintGraphic(gright_corner_wall, 6, 56); */
 
 	
 	
@@ -64,6 +70,7 @@ int main(int argc, char *argv[]) {
 	//PrintGraphic(gright_wall, 1, 56);
 	/* PrintGraphic(gwallface, 1, 2); */
 
+	/* PrintGraphic(gright_sword, 5, 200); */
 
 	PrintBorder();
 	
@@ -79,13 +86,19 @@ int main(int argc, char *argv[]) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
 	    MovePlayer(&map, &player, ch);
-	    PrintMap(map);
+	    /* PrintMap(map); */
 	    refresh();
 	    break;
 	    
 	case 'q':
 	    // HACK
+	    endwin();
 	    exit(0);
+	    break;
+
+	case 'p':
+	    ArrowStart(1);
+	    
 	    
 	default:
 	    continue;
@@ -97,4 +110,4 @@ int main(int argc, char *argv[]) {
     endwin();
     printf("End of program.");
     return 0;
-}  
+}

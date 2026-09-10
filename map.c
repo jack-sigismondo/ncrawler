@@ -17,7 +17,7 @@ void EmptyMap(Map *map) {
     for (int i = 0; i < (sizeof(map->arr) / sizeof(map->arr[0])); ++i) {
 	for (int j = 0; j < (sizeof(map->arr) / sizeof(map->arr[0])); ++j) {
 	    
-	    map->arr[i][j] = M_EMPTY; // HACK This should actually be empty once the map is generated
+	    map->arr[i][j] = M_EMPTY;
 	}
     }
 }
