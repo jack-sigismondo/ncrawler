@@ -10,96 +10,46 @@ int entity_count = 0;
 // TODO How to keep track of entities?
 
 
-Player CreatePlayer(int difficulty) {
-    
-    Player player;
-    player.coord[0] = 9;
-    player.coord[1] = 9;
-    player.direction = 'n';
+Player CreatePlayer(int difficulty) { // TODO change to not return the actual
+				      // player but create him with malloc
 
-    if (difficulty == 0) {
-	player.hp_max = 100;
-	player.hp = 100;
-    }
-    else {
-	player.hp_max = 85;
-	player.hp = 85;
-    }
+	Player player;
+	player.coord[0] = 9;
+	player.coord[1] = 9;
+	player.direction = 0; // n e s w ; 0 1 2 3
 
-    return player;
+	if (difficulty == 0) {
+		player.hp_max = 100;
+		player.hp = 100;
+	}
+	else {
+		player.hp_max = 85;
+		player.hp = 85;
+	}
+
+	return player;
 }
 
 
-// TODO switch directions to enums and - or + to change them and rotate them
 int MovePlayer(Map *map, Player *player, int keypress) {
-    
-    switch (keypress) {
-    case KEY_UP:
 
-	switch (player->direction) {
-	case 'n':
-	    if ((player->coord[0] > 0) && (map->arr[player->coord[0] - 1][player->coord[1]] == M_PATH)) {
-
-		map->arr[player->coord[0]][player->coord[1]] = M_PATH;
-		map->arr[player->coord[0] - 1][player->coord[1]] = M_PLAYER;
-		
-		player->coord[0] -= 1;
-
-		return 1;
-	    }
-	    else { return 0; }
-	    break;
-	    
-	case 'e':
-	    if ((player->coord[1] < 19) && (map->arr[player->coord[0]][player->coord[1] + 1] == M_PATH)) {
-		player->coord[1] += 1;
-		return 1;
-	    }
-	    else { return 0; }
-	    break;
-	    
-	case 's':
-	    if ((player->coord[0] < 19) && (map->arr[player->coord[0] + 1][player->coord[1]] == M_PATH)) {
-		player->coord[0] += 1;
-		return 1;
-	    }
-	    else { return 0; }
-	    break;
-	    
-	case 'w':
-	    if ((player->coord[1] > 0) && (map->arr[player->coord[0]][player->coord[1] - 1] == M_PATH)) {
-		player->coord[1] -= 1;
-		return 1;
-	    }
-	    else { return 0; }
-	    break;
-
-    case KEY_DOWN:
-      break;
-
-	// TODO Transpose the map
-    case KEY_LEFT:
-	switch (player->direction) {
-	case 'n': player->direction = 'w'; return 1; break;
-	case 'e': player->direction = 'n'; return 1; break;
-	case 's': player->direction = 'e'; return 1; break;
-	case 'w': player->direction = 's'; return 1; break;
+	switch(keypress) { // mod by 4 to change direction
+		case KEY_UP: // TODO add movement checks
+			break;
+		case KEY_DOWN: // TODO add movement checks
+			break;
+		case KEY_LEFT:
+			// % 4 keeps the number rotation within 0-3 for nesw
+			player->direction = (player->direction + 3) % 4; 
+			PrintDebugInt(player->direction);
+			TransposeMap(map, 'l');
+			break;
+		case KEY_RIGHT:
+			player->direction = (player->direction + 1) % 4;
+			PrintDebugInt(player->direction);
+			TransposeMap(map, 'r');
+			break;
 	}
-	break;
-	
-    case KEY_RIGHT:
-	switch (player->direction) {
-	case 'n': player->direction = 'e'; return 1; break;
-	case 'e': player->direction = 's'; return 1; break;
-	case 's': player->direction = 'w'; return 1; break;
-	case 'w': player->direction = 'n'; return 1; break;
-	}
-	break;
-    
-    
-	}
-    }
 
-    return 0;
-    
+	return 1;
 }

@@ -2,112 +2,79 @@
 #include <stdio.h>
 #include <ncurses.h>
 
-
 // Framework
 #include "graphics.c"
-#include "graphics.h"
-#include "logic.h"
-#include "map.c"
-#include "ui.c"
 #include "logic.c"
+#include "map.c"
 
 // Minigames
 #include "arrow.c"
 
+// TODO get rid of ".txt" everywhere. Just append it to the string so you don't have to type it every time
+// TODO adjust the height of the game
+// TODO add actual screen border variables
 
 int main(int argc, char *argv[]) {
-    printf("Beginning of program.");
-
-    
-
-    // TESTING
-    Map map = {1, 2};
-    GenerateMap(&map, 1);
-    
-    Player player = CreatePlayer(0);
-
-    /* MovePlayer(&map, &player, KEY_UP); */
-
-    
-    /* return 0; */
-    // TESTING
-    
-    // ncurses initialization
-    int ch = 'u';
-    initscr();
-    raw();
-    cbreak();  
-    keypad(stdscr, TRUE);
-    nonl(); // TODO What does this do?
-    noecho();
-
-    /* LoadGraphics(); */ // TODO DELETE
-    
-
-    for (;;) {
-	ch = getch();
-
-	/* PrintGraphic(1, 2, "left-wall.txt"); */
-
-	/* PrintGraphic(6, 21, "left-forewall.txt"); */
-
-	/* PrintGraphic(gleft_corner_wall, 6, 2); */
+	printf("Beginning of program.");
 
 
-	/* PrintGraphic(gwall, 6, 21); */
-	
-	
+	Map *map = malloc(sizeof(Map));
+	ReadMap(map, "1.txt");
 
-	/* PrintGraphic(gforewall, 8, 26); */
 
-	/* PrintGraphic(gright_forewall, 6, 50); */
+	Player player = CreatePlayer(0);
 
-	/* PrintGraphic(gright_corner_wall, 6, 56); */
 
-	
-	
-	
-	//PrintGraphic(gright_wall, 1, 56);
-	/* PrintGraphic(gwallface, 1, 2); */
 
-	/* PrintGraphic(gright_sword, 5, 200); */
+	// ncurses initialization
+	int ch = 0;
+	initscr();
+	raw();
+	cbreak();  
+	keypad(stdscr, TRUE);
+	nonl(); // TODO What does this do?
+	noecho();
 
-	PrintBorder();
-	
+	while (ch != 'q') {
+		ch = getch(); // Originally at the end
 
-	refresh();
-	
-	// TODO logic section
+		PrintGraphic(1, 2, "wall-left.txt");
+		PrintGraphic(6, 21, "wall-left-fore.txt");
 
-	// Keypress logic
-	switch (ch) {
-	case KEY_UP:
-	case KEY_DOWN:
-	case KEY_LEFT:
-	case KEY_RIGHT:
-	    MovePlayer(&map, &player, ch);
-	    /* PrintMap(map); */
-	    refresh();
-	    break;
-	    
-	case 'q':
-	    // HACK
-	    endwin();
-	    exit(0);
-	    break;
+		PrintGraphic(8, 26, "wall-fore.txt");
 
-	case 'p':
-	    ArrowStart(1);
-	    
-	    
-	default:
-	    continue;
+		/* PrintGraphic(6, 50, "wall-right-fore.txt"); */
+		PrintGraphic(1, 56, "wall-right.txt");
+
+		// Should print over everything else
+		/* PrintGraphic(6, 21, "wall.txt"); */
+
+		// Keypress logic
+		switch (ch) {
+			case KEY_UP:
+				MovePlayer(map, &player, ch);
+				break;
+			case KEY_DOWN:
+				MovePlayer(map, &player, ch);
+				break;
+			case KEY_LEFT:
+				MovePlayer(map, &player, ch);
+				break;
+			case KEY_RIGHT:
+				MovePlayer(map, &player, ch);
+				break;
+			case 'a':
+				ArrowStart(1);
+			default:
+				break;
+
+		}
+		// secondary print
+		PrintMap(map);
+		PrintBorder();
+		refresh();
 	}
 
-	refresh();
-    }
-    
-    endwin();
-    printf("End of program.");
-    return 0;
+	endwin();
+	return 0;
 }

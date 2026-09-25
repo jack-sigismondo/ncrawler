@@ -1,9 +1,22 @@
 #include <stdlib.h>
 #include <ncurses.h>
-#include <strings.h>
+#include <string.h>
 #include "graphics.h"
 
-// NOTE You must print from left to right
+
+void PrintDebugString(char* string) {
+	mvaddstr(30, 2, "The string you entered is:");
+	mvaddstr(31, 2, string);
+}
+
+
+void PrintDebugInt(int num) {
+	mvaddstr(32, 2, "The number you entered is:");
+	char string[10];
+	snprintf(string, sizeof(string), "%d", num);
+	mvaddstr(33, 2, string);
+}
+
 
 void PrintGraphic(int y, int x, char* file_name) {
 
@@ -35,84 +48,59 @@ void PrintGraphic(int y, int x, char* file_name) {
 }
 
 
-// Take a graphic struct and print it along given y and x values
-void PrintGraphicOld(Graphic graphic, int y, int x) { // TODO Change to y, x, graphic // Change to mvaddch
+void PrintBorder() {
 
-  
-  
+    for (int x = 0; x < 120; ++x) {
 
-    /* for (int i = 0; i < graphic.size_y; ++i) { */
-    /* 	mvaddstr(y++, x, graphic.art[i]); */
-    /* } */
-}
+	// Top bar
+	mvaddch(0, x, '|');
+	// Middle bar
+	mvaddch(26, x, '|');
+	// Bottom bar
+	mvaddch(60, x, '|');
 
+	// Advance the cursor
+	x += 1;
 
-Graphic LoadGraphic(char* file_name) {
-    
-    Graphic graphic = {0, 0};
-    
-    char file_path[30] = "graphics/";
-    strcat(file_path, file_name); // HACK
-    FILE *file_ptr = fopen(file_path, "r");
-    
-    char line[150];
-    while (fgets(line, sizeof(line), file_ptr) != NULL) {
-	strcpy(graphic.art[graphic.size_y], line);
-	++graphic.size_y;
+	// Top bar
+	mvaddch(0, x, '-');
+	// Middle bar
+	mvaddch(26, x, '-');
+	// Bottom bar
+	mvaddch(60, x, '-');
+	
     }
 
-    return graphic;
-}
+    for (int y = 1; y < 60; ++y) {
 
-// TODO See if I even need this here, or if I need the extern for anything
+	// Left bar
+	mvaddch(y, 0, '-');
+	mvaddch(y, 1, '|');
 
-Graphic gleft_wall;
-Graphic gleft_forewall;
+	//Middle bar
+	mvaddch(y, 75, '|');
+	mvaddch(y, 76, '-');
 
-Graphic gright_wall;
-Graphic gright_forewall;
+	// Right bar
+	mvaddch(y, 119, '|');
+	mvaddch(y, 120, '-');
 
-Graphic gwallface;
-Graphic gwall;
-Graphic gforewall;
+	++y;
+	
+	// Left bar
+	mvaddch(y, 0, '|');
+	mvaddch(y, 1, '-');
 
-Graphic gright_corner_wall;
-Graphic gleft_corner_wall;
+	// Middle bar
+	mvaddch(y, 75, '-');
+	mvaddch(y, 76, '|');
 
-Graphic gleft_sword;
-Graphic gright_sword;
+	// Right bar
+	mvaddch(y, 119, '-');
+	mvaddch(y, 120, '|');
+    }
 
-Graphic gdown_arrow;
-Graphic gup_arrow;
-
-Graphic gleft_run;
-Graphic gright_run;
-Graphic gstanding;
-
-
-void LoadGraphics() {
-    gleft_wall = LoadGraphic("left-wall.txt");
-    gleft_forewall = LoadGraphic("left-forewall.txt");
+    // -.-
+    mvaddch(0, 120, '|');
     
-    gright_wall = LoadGraphic("right-wall.txt");
-    gright_forewall = LoadGraphic("right-forewall.txt");
-
-    gwallface = LoadGraphic("wallface.txt");
-    gwall = LoadGraphic("wall.txt");
-    gforewall = LoadGraphic("forewall.txt");
-
-    gright_corner_wall = LoadGraphic("r-corner-wall.txt");
-    gleft_corner_wall = LoadGraphic("l-corner-wall.txt");
-
-    gleft_sword = LoadGraphic("l-sword.txt");
-    gright_sword = LoadGraphic("r-sword.txt");
-
-    gdown_arrow = LoadGraphic("d-arrow.txt");
-    gup_arrow = LoadGraphic("u-arrow.txt");
-
-
-    gleft_run = LoadGraphic("l-run.txt");
-    gright_run = LoadGraphic("r-run.txt");
-    gstanding = LoadGraphic("standing.txt");
-
 }

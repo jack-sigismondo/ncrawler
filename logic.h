@@ -15,17 +15,11 @@ typedef struct Entity {
 
 } Entity;
 
-typedef enum EntityType {
+typedef enum EntityType { // FIXME
     E_PLAYER,
     E_KEY,
     
-    
-    
-    
 } EntityType;
-
-
-
 
 
 typedef struct Player {
@@ -36,13 +30,11 @@ typedef struct Player {
     int difficulty;
 
     int coord[2];
-    char direction; // n s e w
+    int direction;
     
     // TODO
     // Armor (in strings and int array)
 } Player;
-
-Player CreatePlayer(int difficulty);
 
 
 typedef struct Key { // Could maybe go on a wall
@@ -52,11 +44,6 @@ typedef struct Key { // Could maybe go on a wall
     int picked_up; // Bool
 
 } Key;
-
-
-
-// Takes a player and moves if possible, returning 1 on a success (or 0 on fail)
-/* int MovePlayer(Player *player, Map *map, int keypress); */
 
 
 #endif // LOGIC_H
