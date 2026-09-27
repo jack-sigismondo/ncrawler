@@ -20,15 +20,12 @@ void PrintDebugInt(int num) {
 
 void PrintGraphic(int y, int x, char* file_name) {
 
-  int init_y = y; // HACK unneccessary I think
   int init_x = x;
-
 
   char file_path[30] = "graphics/";
   strcat(file_path, file_name); // HACK
   FILE *file_ptr = fopen(file_path, "r");
 
-  
   int ch; // NOTE This is an int to handle EOF
   while ((ch = fgetc(file_ptr)) != EOF) {
 
@@ -40,8 +37,6 @@ void PrintGraphic(int y, int x, char* file_name) {
     else { mvaddch(y, x++, ch); }
 
   }
-
-  /* refresh(); // NOTE shouldn't be here maybe */
   
   fclose(file_ptr);
 
@@ -57,7 +52,7 @@ void PrintBorder() {
 	// Middle bar
 	mvaddch(26, x, '|');
 	// Bottom bar
-	mvaddch(60, x, '|');
+	mvaddch(50, x, '|');
 
 	// Advance the cursor
 	x += 1;
@@ -67,11 +62,11 @@ void PrintBorder() {
 	// Middle bar
 	mvaddch(26, x, '-');
 	// Bottom bar
-	mvaddch(60, x, '-');
+	mvaddch(50, x, '-');
 	
     }
 
-    for (int y = 1; y < 60; ++y) {
+    for (int y = 1; y < 51; ++y) {
 
 	// Left bar
 	mvaddch(y, 0, '-');
@@ -100,7 +95,5 @@ void PrintBorder() {
 	mvaddch(y, 120, '|');
     }
 
-    // -.-
     mvaddch(0, 120, '|');
-    
 }

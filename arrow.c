@@ -6,8 +6,6 @@
 #include "graphics.h"
 
 
-// TODO Rename this file to arrow dodge something
-
 typedef struct Runner {
     int y;
     int x;
@@ -17,9 +15,10 @@ typedef struct Runner {
 
 } Runner;
 
+
 Runner CreateRunner(int hp) {
     Runner runner;
-    runner.y = 49;
+    runner.y = 39;
     runner.x = 61;
     runner.hp = 100;
     runner.graphic = "runner-idle.txt";
@@ -64,7 +63,7 @@ void ResetArrow(Arrow* arrow, int difficulty) {
 // 0 for air, 1 for player, 2 for floor
 int CheckCollision(Arrow* arrow, Runner* runner) { // TODO
     
-    if (arrow->y >= 40) {
+    if (arrow->y >= 30) { // TODO change to runner's height
 	
 	int distance_apart = abs((runner->x + 6) - (arrow->x + 2));
 	
@@ -75,7 +74,7 @@ int CheckCollision(Arrow* arrow, Runner* runner) { // TODO
 	}
 
 	// Collision with ground
-	if (arrow->y > 48) {
+	if (arrow->y > 40) {
 	    mvaddch(arrow->y, arrow->x -1, '*');
 	    mvaddch(arrow->y, arrow->x +6, '*');
 	    return 2;
@@ -146,7 +145,7 @@ void ArrowStart(int difficulty) {
 	clear();
 	PrintGraphic(runner.y, runner.x, runner.graphic);
 	// TODO Change this to a generic graphic
-	mvaddstr(60, 0, "========================================================================================================================");
+	PrintGraphic(50, 0, "floor-generic.txt");
 
 	// Iterate for every arrow in the quiver
 	for (int i = 0; i < sizeof(quiver) / sizeof(quiver[0]); ++i) {
