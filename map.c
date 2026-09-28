@@ -11,7 +11,7 @@ void TransposeMap(Map *map, char direction) {
 
 	int new_map[20][20];
 	int map_size = sizeof(map->arr) / sizeof(map->arr[0]); 
-	
+
 	// set a counter then do a single while
 	int right_turns;
 	switch (direction) {

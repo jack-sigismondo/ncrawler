@@ -20,80 +20,80 @@ void PrintDebugInt(int num) {
 
 void PrintGraphic(int y, int x, char* file_name) {
 
-  int init_x = x;
+	int init_x = x;
 
-  char file_path[30] = "graphics/";
-  strcat(file_path, file_name); // HACK
-  FILE *file_ptr = fopen(file_path, "r");
+	char file_path[30] = "graphics/";
+	strcat(file_path, file_name); // HACK
+	FILE *file_ptr = fopen(file_path, "r");
 
-  int ch; // NOTE This is an int to handle EOF
-  while ((ch = fgetc(file_ptr)) != EOF) {
+	int ch; // NOTE This is an int to handle EOF
+	while ((ch = fgetc(file_ptr)) != EOF) {
 
-    if (ch == '\n') {
-      x = init_x;
-      y += 1;
-    }
+		if (ch == '\n') {
+			x = init_x;
+			y += 1;
+		}
 
-    else { mvaddch(y, x++, ch); }
+		else { mvaddch(y, x++, ch); }
 
-  }
-  
-  fclose(file_ptr);
+	}
+
+	fclose(file_ptr);
 
 }
 
 
 void PrintBorder() {
 
-    for (int x = 0; x < 120; ++x) {
+	for (int x = 0; x < 120; ++x) {
 
-	// Top bar
-	mvaddch(0, x, '|');
-	// Middle bar
-	mvaddch(26, x, '|');
-	// Bottom bar
-	mvaddch(50, x, '|');
+		// Top bar
+		mvaddch(0, x, '|');
+		// Middle bar
+		mvaddch(26, x, '|');
+		// Bottom bar
+		mvaddch(50, x, '|');
 
-	// Advance the cursor
-	x += 1;
+		// Advance the cursor
+		x += 1;
 
-	// Top bar
-	mvaddch(0, x, '-');
-	// Middle bar
-	mvaddch(26, x, '-');
-	// Bottom bar
-	mvaddch(50, x, '-');
-	
-    }
+		// Top bar
+		mvaddch(0, x, '-');
+		// Middle bar
+		mvaddch(26, x, '-');
+		// Bottom bar
+		mvaddch(50, x, '-');
 
-    for (int y = 1; y < 51; ++y) {
+	}
 
-	// Left bar
-	mvaddch(y, 0, '-');
-	mvaddch(y, 1, '|');
+	for (int y = 1; y < 51; ++y) {
 
-	//Middle bar
-	mvaddch(y, 75, '|');
-	mvaddch(y, 76, '-');
+		// Left bar
+		mvaddch(y, 0, '-');
+		mvaddch(y, 1, '|');
 
-	// Right bar
-	mvaddch(y, 119, '|');
-	mvaddch(y, 120, '-');
+		//Middle bar
+		mvaddch(y, 75, '|');
+		mvaddch(y, 76, '-');
 
-	++y;
-	
-	// Left bar
-	mvaddch(y, 0, '|');
-	mvaddch(y, 1, '-');
+		// Right bar
+		mvaddch(y, 119, '|');
+		mvaddch(y, 120, '-');
 
-	// Middle bar
-	mvaddch(y, 75, '-');
-	mvaddch(y, 76, '|');
+		++y;
 
-	// Right bar
-	mvaddch(y, 119, '-');
-	mvaddch(y, 120, '|');
-    }
+		// Left bar
+		mvaddch(y, 0, '|');
+		mvaddch(y, 1, '-');
 
-    mvaddch(0, 120, '|');
+		// Middle bar
+		mvaddch(y, 75, '-');
+		mvaddch(y, 76, '|');
+
+		// Right bar
+		mvaddch(y, 119, '-');
+		mvaddch(y, 120, '|');
+	}
+
+	mvaddch(0, 120, '|');
 }

@@ -3,9 +3,9 @@
 
 
 typedef struct Graphic {
-  int size_y;
-  int size_x;
-  char art[60][150];
+	int size_y;
+	int size_x;
+	char art[60][150];
 } Graphic;
 
 

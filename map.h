@@ -3,30 +3,30 @@
 
 
 typedef struct Map {
-    int arr[20][20];
+	int arr[20][20];
 
-    char name[20];
-    
+	char name[20];
+
 } Map;
 
 
 typedef enum MapCode {
-    M_EMPTY, //0
-    M_PATH,
-    M_PATH_SEEN,
-    M_BLOCKED,
-    M_BLOCKED_SEEN,
-    M_PLAYER, // 5
-    M_VISITED,
-    M_ENEMY, // ++enemy is now a strong_enemy
-    M_STRONG_ENEMY,
-    M_STAIRS,
-    M_POI, // A
-    M_TREASURE,
-    M_KEY,
-    M_LEVER,
-    M_LOCKED_DOOR, //E // And unlock it
-    // TODO 
+	M_EMPTY, //0
+	M_PATH,
+	M_PATH_SEEN,
+	M_BLOCKED,
+	M_BLOCKED_SEEN,
+	M_PLAYER, // 5
+	M_VISITED,
+	M_ENEMY, // ++enemy is now a strong_enemy
+	M_STRONG_ENEMY,
+	M_STAIRS,
+	M_POI, // A
+	M_TREASURE,
+	M_KEY,
+	M_LEVER,
+	M_LOCKED_DOOR, //E // And unlock it
+				   // TODO 
 } MapCode;
 
 

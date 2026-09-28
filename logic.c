@@ -11,7 +11,7 @@ int entity_count = 0;
 
 
 Player CreatePlayer(int difficulty) { // TODO change to not return the actual
-				      // player but create him with malloc
+									  // player but create him with malloc
 
 	Player player;
 	player.coord[0] = 9;
