@@ -22,8 +22,11 @@ void PrintGraphic(int y, int x, char* file_name) {
 
 	int init_x = x;
 
+	// sandwich file_name with the folder and .txt
 	char file_path[30] = "graphics/";
-	strcat(file_path, file_name); // HACK
+	strcat(file_path, file_name);
+	strcat(file_path, ".txt");
+
 	FILE *file_ptr = fopen(file_path, "r");
 
 	int ch; // NOTE This is an int to handle EOF

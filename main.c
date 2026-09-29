@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 
 	Map *map = malloc(sizeof(Map));
-	ReadMap(map, "1.txt");
+	ReadMap(map, "1");
 
 
 	Player player = CreatePlayer(0);
@@ -38,16 +38,16 @@ int main(int argc, char *argv[]) {
 	while (ch != 'q') {
 		ch = getch(); // Originally at the end
 
-		PrintGraphic(1, 2, "wall-left.txt");
-		PrintGraphic(6, 21, "wall-left-fore.txt");
+		PrintGraphic(1, 2, "wall-left");
+		PrintGraphic(6, 21, "wall-left-fore");
 
-		PrintGraphic(8, 26, "wall-fore.txt");
+		PrintGraphic(8, 26, "wall-fore");
 
-		/* PrintGraphic(6, 50, "wall-right-fore.txt"); */
-		PrintGraphic(1, 56, "wall-right.txt");
+		/* PrintGraphic(6, 50, "wall-right-fore"); */
+		PrintGraphic(1, 56, "wall-right");
 
 		// Should print over everything else
-		/* PrintGraphic(6, 21, "wall.txt"); */
+		/* PrintGraphic(6, 21, "wall"); */
 
 		// Keypress logic
 		switch (ch) {

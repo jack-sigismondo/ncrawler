@@ -57,8 +57,11 @@ void EmptyMap(Map *map) {
 // 19x19 grid of enums i.e. (0 to whatever)
 void ReadMap(Map *map, char* file_name) {
 
+	// sanwich file_name between maps/ and .txt
 	char file_path[30] = "maps/";
-	strcat(file_path, file_name); // HACK
+	strcat(file_path, file_name);
+	strcat(file_path, ".txt");
+
 	FILE *file_ptr = fopen(file_path, "r");
 
 	int ch; // NOTE This is an int to handle EOF
