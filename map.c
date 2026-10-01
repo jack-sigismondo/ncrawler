@@ -13,22 +13,22 @@ void TransposeMap(Map *map, char direction) {
 	int map_size = sizeof(map->arr) / sizeof(map->arr[0]); 
 
 	// set a counter then do a single while
-	int right_turns;
+	int turns;
 	switch (direction) {
 		case 'r':
-			right_turns = 1;
+			turns = 1;
 			break;
 		case 'b':
-			right_turns = 2;
+			turns = 2;
 			break;
 		case 'l':
-			right_turns = 3;
+			turns = 3;
 			break;
 		default:
 			return;
 	}
 
-	while (right_turns != 0) {
+	while (turns != 0) {
 		memcpy(new_map, map->arr, 20*20 * sizeof(int));
 		for (int i = 0; i < map_size; ++i) {
 			for (int j = 0; j < map_size; ++j) {
@@ -37,7 +37,7 @@ void TransposeMap(Map *map, char direction) {
 			}
 		}
 
-		right_turns -= 1;
+		turns -= 1;
 	}
 }
 

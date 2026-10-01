@@ -15,8 +15,6 @@
 // TODO add actual screen border variables
 
 int main(int argc, char *argv[]) {
-	printf("Beginning of program.");
-
 
 	Map *map = malloc(sizeof(Map));
 	ReadMap(map, "1");
@@ -38,16 +36,6 @@ int main(int argc, char *argv[]) {
 	while (ch != 'q') {
 		ch = getch(); // Originally at the end
 
-		PrintGraphic(1, 2, "wall-left");
-		PrintGraphic(6, 21, "wall-left-fore");
-
-		PrintGraphic(8, 26, "wall-fore");
-
-		/* PrintGraphic(6, 50, "wall-right-fore"); */
-		PrintGraphic(1, 56, "wall-right");
-
-		// Should print over everything else
-		/* PrintGraphic(6, 21, "wall"); */
 
 		// Keypress logic
 		switch (ch) {
@@ -69,6 +57,8 @@ int main(int argc, char *argv[]) {
 				break;
 
 		}
+
+		PrintEnvironment(map, &player);
 		// secondary print
 		PrintMap(map);
 		PrintBorder();

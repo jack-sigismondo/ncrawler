@@ -53,7 +53,7 @@ void PrintBorder() {
 		// Top bar
 		mvaddch(0, x, '|');
 		// Middle bar
-		mvaddch(26, x, '|');
+		mvaddch(28, x, '|');
 		// Bottom bar
 		mvaddch(50, x, '|');
 
@@ -63,7 +63,7 @@ void PrintBorder() {
 		// Top bar
 		mvaddch(0, x, '-');
 		// Middle bar
-		mvaddch(26, x, '-');
+		mvaddch(28, x, '-');
 		// Bottom bar
 		mvaddch(50, x, '-');
 

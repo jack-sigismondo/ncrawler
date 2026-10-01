@@ -29,7 +29,8 @@ typedef struct Player {
 	int hp_max;
 	int difficulty;
 
-	int coord[2];
+	int y;
+	int x;
 	int direction;
 
 	// TODO

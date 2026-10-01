@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include "graphics.h"
+// TODO get rid of .graphics
 
 
 typedef struct Runner {
@@ -21,7 +22,7 @@ Runner CreateRunner(int hp) {
 	runner.y = 39;
 	runner.x = 61;
 	runner.hp = 100;
-	runner.graphic = "runner-idle.txt";
+	runner.graphic = "runner-idle";
 
 	return runner;
 }    
@@ -44,7 +45,7 @@ Arrow CreateArrow(int delay, int location) { // delay = int * 100 iterations wor
 	arrow.y = delay * -100;
 	arrow.x = location * 15;
 
-	arrow.graphic = "arrow-down.txt";
+	arrow.graphic = "arrow-down";
 	return arrow;
 }
 
@@ -127,25 +128,25 @@ void ArrowStart(int difficulty) {
 				return;
 
 			case KEY_LEFT:
-				runner.graphic = "runner-left.txt";
+				runner.graphic = "runner-left";
 				if (runner.x - 5 > 0) { runner.x -= 5; }
 				break;
 
 			case KEY_RIGHT:
-				runner.graphic = "runner-right.txt";
+				runner.graphic = "runner-right";
 				if (runner.x + 5 < 110) { runner.x += 5; }
 
 				break;
 
 			default:
-				runner.graphic = "runner-idle.txt";
+				runner.graphic = "runner-idle";
 				break;
 		}
 
 		clear();
 		PrintGraphic(runner.y, runner.x, runner.graphic);
 		// TODO Change this to a generic graphic
-		PrintGraphic(50, 0, "floor-generic.txt");
+		PrintGraphic(50, 0, "floor-generic");
 
 		// Iterate for every arrow in the quiver
 		for (int i = 0; i < sizeof(quiver) / sizeof(quiver[0]); ++i) {
