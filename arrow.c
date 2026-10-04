@@ -17,7 +17,7 @@ typedef struct Runner {
 } Runner;
 
 
-Runner CreateRunner(int hp) {
+Runner create_runner(int hp) {
 	Runner runner;
 	runner.y = 39;
 	runner.x = 61;
@@ -39,7 +39,7 @@ typedef struct Arrow {
 } Arrow;
 
 
-Arrow CreateArrow(int delay, int location) { // delay = int * 100 iterations worth of wait
+Arrow create_arrow(int delay, int location) { // delay = int * 100 iterations worth of wait
 	Arrow arrow;
 
 	arrow.y = delay * -100;
@@ -50,7 +50,7 @@ Arrow CreateArrow(int delay, int location) { // delay = int * 100 iterations wor
 }
 
 
-void ResetArrow(Arrow* arrow, int difficulty) {
+void reset_arrow(Arrow* arrow, int difficulty) {
 
 	arrow->y = -100 + (difficulty * 25);
 	if (arrow->y > 0) { arrow->y = 0; }
@@ -61,20 +61,22 @@ void ResetArrow(Arrow* arrow, int difficulty) {
 
 
 // Check if the arrow is hitting the player or floor
-// 0 for air, 1 for player, 2 for floor
-int CheckCollision(Arrow* arrow, Runner* runner) { // TODO
+// 0 for neither, 1 for player, 2 for floor
+int check_arrow(Arrow* arrow, Runner* runner) { // TODO
 
+	// arrow reaches head height
 	if (arrow->y >= 30) { // TODO change to runner's height
-
+		
 		int distance_apart = abs((runner->x + 6) - (arrow->x + 2));
 
-		// Collision with player (
+		// arrow is around head's x coord
 		if (distance_apart < 3) {
 
 			return 1;
 		}
 
-		// Collision with ground
+
+		// arrow is at the floor
 		if (arrow->y > 40) {
 			mvaddch(arrow->y, arrow->x -1, '*');
 			mvaddch(arrow->y, arrow->x +6, '*');
@@ -86,18 +88,18 @@ int CheckCollision(Arrow* arrow, Runner* runner) { // TODO
 }
 
 
-void ArrowStart(int difficulty) {
+void arrow_start(int difficulty) {
 
 	int ch;
 	halfdelay(1); // NOTE
 	srand(time(NULL));
 	clear();
 
-	Runner runner = CreateRunner(100);
+	Runner runner = create_runner(100);
 
 	Arrow quiver[8];
 	for (int i = 0; i < 8; ++i) { // HACK
-		quiver[i] = CreateArrow(i, i);
+		quiver[i] = create_arrow(i, i);
 	}
 
 	int iterations = 0;
@@ -144,22 +146,22 @@ void ArrowStart(int difficulty) {
 		}
 
 		clear();
-		PrintGraphic(runner.y, runner.x, runner.graphic);
+		print_graphic(runner.y, runner.x, runner.graphic);
 		// TODO Change this to a generic graphic
-		PrintGraphic(50, 0, "floor-generic");
+		print_graphic(50, 0, "floor-generic");
 
 		// Iterate for every arrow in the quiver
 		for (int i = 0; i < sizeof(quiver) / sizeof(quiver[0]); ++i) {
 
 			quiver[i].y += difficulty;
-			PrintGraphic(quiver[i].y, quiver[i].x, quiver[i].graphic);
+			print_graphic(quiver[i].y, quiver[i].x, quiver[i].graphic);
 
-			switch(CheckCollision(&quiver[i], &runner)) {
+			switch(check_arrow(&quiver[i], &runner)) {
 				case 1: // Gameover
 					exit(0); // HACK
 					break;
 				case 2: // Arrow hits the floor
-					ResetArrow(&quiver[i], difficulty);
+					reset_arrow(&quiver[i], difficulty);
 					break;
 				default:
 					break;
