@@ -1,102 +1,101 @@
-#include <stdlib.h>
-#include <ncurses.h>
-#include <string.h>
 #include "graphics.h"
+#include <ncurses.h>
+#include <stdlib.h>
+#include <string.h>
 
-
-void PrintDebugString(char* string) {
-	mvaddstr(30, 2, "The string you entered is:");
-	mvaddstr(31, 2, string);
+void PrintDebugString(char *string) {
+  mvaddstr(30, 2, "The string you entered is:");
+  mvaddstr(31, 2, string);
 }
-
 
 void PrintDebugInt(int num) {
-	mvaddstr(32, 2, "The number you entered is:");
-	char string[10];
-	snprintf(string, sizeof(string), "%d", num);
-	mvaddstr(33, 2, string);
+  mvaddstr(32, 2, "The number you entered is:");
+  char string[10];
+  snprintf(string, sizeof(string), "%d", num);
+  mvaddstr(33, 2, string);
 }
 
+void print_graphic(int y, int x, char *file_name) {
 
-void PrintGraphic(int y, int x, char* file_name) {
+  int init_x = x;
 
-	int init_x = x;
+  // sandwich file_name with the folder and .txt
+  char file_path[100] = "graphics/";
+  strcat(file_path, file_name);
+  strcat(file_path, ".txt");
 
-	// sandwich file_name with the folder and .txt
-	char file_path[30] = "graphics/";
-	strcat(file_path, file_name);
-	strcat(file_path, ".txt");
+  FILE *file_ptr = fopen(file_path, "r");
 
-	FILE *file_ptr = fopen(file_path, "r");
+  if (file_ptr == NULL) {
+    printf("Error: Could not find file");
+  }
 
-	int ch; // NOTE This is an int to handle EOF
-	while ((ch = fgetc(file_ptr)) != EOF) {
+  int ch; // NOTE This is an int to handle EOF
+  while ((ch = fgetc(file_ptr)) != EOF) {
 
-		if (ch == '\n') {
-			x = init_x;
-			y += 1;
-		}
+    if (ch == '\n') {
+      x = init_x;
+      y += 1;
+    }
 
-		else { mvaddch(y, x++, ch); }
+    else {
+      mvaddch(y, x++, ch);
+    }
+  }
 
-	}
-
-	fclose(file_ptr);
-
+  fclose(file_ptr);
 }
-
 
 void PrintBorder() {
 
-	for (int x = 0; x < 120; ++x) {
+  for (int x = 0; x < 120; ++x) {
 
-		// Top bar
-		mvaddch(0, x, '|');
-		// Middle bar
-		mvaddch(28, x, '|');
-		// Bottom bar
-		mvaddch(50, x, '|');
+    // Top bar
+    mvaddch(0, x, '|');
+    // Middle bar
+    mvaddch(28, x, '|');
+    // Bottom bar
+    mvaddch(50, x, '|');
 
-		// Advance the cursor
-		x += 1;
+    // Advance the cursor
+    x += 1;
 
-		// Top bar
-		mvaddch(0, x, '-');
-		// Middle bar
-		mvaddch(28, x, '-');
-		// Bottom bar
-		mvaddch(50, x, '-');
+    // Top bar
+    mvaddch(0, x, '-');
+    // Middle bar
+    mvaddch(28, x, '-');
+    // Bottom bar
+    mvaddch(50, x, '-');
+  }
 
-	}
+  for (int y = 1; y < 51; ++y) {
 
-	for (int y = 1; y < 51; ++y) {
+    // Left bar
+    mvaddch(y, 0, '-');
+    mvaddch(y, 1, '|');
 
-		// Left bar
-		mvaddch(y, 0, '-');
-		mvaddch(y, 1, '|');
+    // Middle bar
+    mvaddch(y, 75, '|');
+    mvaddch(y, 76, '-');
 
-		//Middle bar
-		mvaddch(y, 75, '|');
-		mvaddch(y, 76, '-');
+    // Right bar
+    mvaddch(y, 119, '|');
+    mvaddch(y, 120, '-');
 
-		// Right bar
-		mvaddch(y, 119, '|');
-		mvaddch(y, 120, '-');
+    ++y;
 
-		++y;
+    // Left bar
+    mvaddch(y, 0, '|');
+    mvaddch(y, 1, '-');
 
-		// Left bar
-		mvaddch(y, 0, '|');
-		mvaddch(y, 1, '-');
+    // Middle bar
+    mvaddch(y, 75, '-');
+    mvaddch(y, 76, '|');
 
-		// Middle bar
-		mvaddch(y, 75, '-');
-		mvaddch(y, 76, '|');
+    // Right bar
+    mvaddch(y, 119, '-');
+    mvaddch(y, 120, '|');
+  }
 
-		// Right bar
-		mvaddch(y, 119, '-');
-		mvaddch(y, 120, '|');
-	}
-
-	mvaddch(0, 120, '|');
+  mvaddch(0, 120, '|');
 }
