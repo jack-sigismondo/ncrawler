@@ -20,7 +20,7 @@ void print_graphic(int y, int x, char *file_name) {
   int init_x = x;
 
   // sandwich file_name with the folder and .txt
-  char file_path[100] = "graphics/";
+  char file_path[200] = "graphics/";
   strcat(file_path, file_name);
   strcat(file_path, ".txt");
 
@@ -46,7 +46,7 @@ void print_graphic(int y, int x, char *file_name) {
   fclose(file_ptr);
 }
 
-void PrintBorder() {
+void print_border_dungeon() {
 
   for (int x = 0; x < 120; ++x) {
 
@@ -91,6 +91,48 @@ void PrintBorder() {
     // Middle bar
     mvaddch(y, 75, '-');
     mvaddch(y, 76, '|');
+
+    // Right bar
+    mvaddch(y, 119, '-');
+    mvaddch(y, 120, '|');
+  }
+
+  mvaddch(0, 120, '|');
+}
+
+void print_border() {
+
+  for (int x = 0; x < 120; ++x) {
+
+    // Top bar
+    mvaddch(0, x, '|');
+    // Bottom bar
+    mvaddch(50, x, '|');
+
+    // Advance the cursor
+    x += 1;
+
+    // Top bar
+    mvaddch(0, x, '-');
+    // Bottom bar
+    mvaddch(50, x, '-');
+  }
+
+  for (int y = 1; y < 51; ++y) {
+
+    // Left bar
+    mvaddch(y, 0, '-');
+    mvaddch(y, 1, '|');
+
+    // Right bar
+    mvaddch(y, 119, '|');
+    mvaddch(y, 120, '-');
+
+    ++y;
+
+    // Left bar
+    mvaddch(y, 0, '|');
+    mvaddch(y, 1, '-');
 
     // Right bar
     mvaddch(y, 119, '-');

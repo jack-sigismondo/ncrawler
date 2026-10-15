@@ -217,8 +217,7 @@ int MovePlayer(Map *map, Player *player, int keypress) {
     UpdateEntitiesFromMap(map, player);
     break;
   }
+
   reveal_map(player->y, player->x, 2, map);
   return 1;
 }
-
-

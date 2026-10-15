@@ -10,6 +10,8 @@
 // Minigames
 #include "arrow.c"
 
+#include "fight.c"
+
 // TODO
 // Main battle screen
 
@@ -52,20 +54,23 @@ int main(int argc, char *argv[]) {
       break;
     case 'r':
       reveal_map(player.y, player.x, 20, map);
+      break;
+    case 'f':
+      fight_start(0, 0);
     case 's':
       map_follows_player = abs(map_follows_player - 1); // toggles 0-1??? check
-
+      break;
     default:
       break;
     }
 
     PrintEnvironment(map, &player); // problem TODO
     // secondary print
-    PrintMap(map, map_follows_player);
-    PrintBorder();
+    print_border_dungeon();
 
     PrintDebugInt(map_follows_player);
 
+    PrintMap(map, map_follows_player);
     refresh();
   }
 

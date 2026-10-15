@@ -11,6 +11,6 @@ void PrintDebugInt(int num);
 void print_graphic(int y, int x, char *filename);
 
 // Outlay the regular dungeon pov boundaries
-void PrintBorder();
+void print_border_dungeon();
 
 #endif // GRAPHICS_H
