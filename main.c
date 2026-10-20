@@ -50,13 +50,13 @@ int main(int argc, char *argv[]) {
       MovePlayer(map, &player, ch);
       break;
     case 'a':
-      arrow_start(1);
+      ArrowStart(1);
       break;
     case 'r':
-      reveal_map(player.y, player.x, 20, map);
+      RevealMap(player.y, player.x, 20, map);
       break;
     case 'f':
-      fight_start(0, 0);
+      FightStart(0, 0);
     case 's':
       map_follows_player = abs(map_follows_player - 1); // toggles 0-1??? check
       break;
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 
     PrintEnvironment(map, &player); // problem TODO
     // secondary print
-    print_border_dungeon();
+    PrintBorderDungeon();
 
     PrintDebugInt(map_follows_player);
 

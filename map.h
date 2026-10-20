@@ -42,6 +42,6 @@ void PrintAtMap(int y, int x, char c);
 // Take a direction ('l'/'r') and return a new transposed map // TODO
 void TransposeMap(Map *map, char direction);
 
-void reveal_map(int y, int x, int reveal_size, Map *map);
+void RevealMap(int y, int x, int reveal_size, Map *map);
 
 #endif // MAP_H

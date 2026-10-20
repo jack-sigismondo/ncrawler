@@ -8,9 +8,9 @@ void PrintDebugString(char *string);
 void PrintDebugInt(int num);
 
 // Take a (y,x) pair and print the filename found in graphics/
-void print_graphic(int y, int x, char *filename);
+void PrintGraphic(int y, int x, char *filename);
 
 // Outlay the regular dungeon pov boundaries
-void print_border_dungeon();
+void PrintBorderDungeon();
 
 #endif // GRAPHICS_H

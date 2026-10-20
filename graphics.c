@@ -15,7 +15,7 @@ void PrintDebugInt(int num) {
   mvaddstr(33, 2, string);
 }
 
-void print_graphic(int y, int x, char *file_name) {
+void PrintGraphic(int y, int x, char *file_name) {
 
   int init_x = x;
 
@@ -46,7 +46,7 @@ void print_graphic(int y, int x, char *file_name) {
   fclose(file_ptr);
 }
 
-void print_border_dungeon() {
+void PrintBorderDungeon() {
 
   for (int x = 0; x < 120; ++x) {
 

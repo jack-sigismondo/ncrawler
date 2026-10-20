@@ -14,7 +14,7 @@ typedef struct Runner {
 
 } Runner;
 
-Runner create_runner(int hp) {
+Runner CreateRunner(int hp) {
   Runner runner;
   runner.y = 39;
   runner.x = 61;
@@ -34,7 +34,7 @@ typedef struct Arrow {
 
 } Arrow;
 
-Arrow create_arrow(int delay,
+Arrow CreateArrow(int delay,
                    int location) { // delay = int * 100 iterations worth of wait
   Arrow arrow;
 
@@ -45,7 +45,7 @@ Arrow create_arrow(int delay,
   return arrow;
 }
 
-void reset_arrow(Arrow *arrow, int difficulty) {
+void ResetArrow(Arrow *arrow, int difficulty) {
 
   arrow->y = -100 + (difficulty * 25);
   if (arrow->y > 0) {
@@ -57,7 +57,7 @@ void reset_arrow(Arrow *arrow, int difficulty) {
 
 // Check if the arrow is hitting the player or floor
 // 0 for neither, 1 for player, 2 for floor
-int check_arrow(Arrow *arrow, Runner *runner) { // TODO
+int CheckArrow(Arrow *arrow, Runner *runner) { // TODO
 
   // arrow reaches head height
   if (arrow->y >= 30) { // TODO change to runner's height
@@ -81,18 +81,18 @@ int check_arrow(Arrow *arrow, Runner *runner) { // TODO
   return 0;
 }
 
-void arrow_start(int difficulty) {
+void ArrowStart(int difficulty) {
 
   int ch;
   halfdelay(1); // NOTE
   srand(time(NULL));
   clear();
 
-  Runner runner = create_runner(100);
+  Runner runner = CreateRunner(100);
 
   Arrow quiver[8];
   for (int i = 0; i < 8; ++i) { // HACK
-    quiver[i] = create_arrow(i, i);
+    quiver[i] = CreateArrow(i, i);
   }
 
   int iterations = 0;
@@ -144,22 +144,22 @@ void arrow_start(int difficulty) {
     }
 
     clear();
-    print_graphic(runner.y, runner.x, runner.graphic);
+    PrintGraphic(runner.y, runner.x, runner.graphic);
     // TODO Change this to a generic graphic
-    print_graphic(50, 0, "floor-generic");
+    PrintGraphic(50, 0, "floor-generic");
 
     // Iterate for every arrow in the quiver
     for (int i = 0; i < sizeof(quiver) / sizeof(quiver[0]); ++i) {
 
       quiver[i].y += difficulty;
-      print_graphic(quiver[i].y, quiver[i].x, quiver[i].graphic);
+      PrintGraphic(quiver[i].y, quiver[i].x, quiver[i].graphic);
 
-      switch (check_arrow(&quiver[i], &runner)) {
+      switch (CheckArrow(&quiver[i], &runner)) {
       case 1:    // Gameover
         exit(0); // HACK
         break;
       case 2: // Arrow hits the floor
-        reset_arrow(&quiver[i], difficulty);
+        ResetArrow(&quiver[i], difficulty);
         break;
       default:
         break;

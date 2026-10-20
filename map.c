@@ -105,7 +105,7 @@ void ReadMap(Map *map, char *file_name) {
   fclose(file_ptr);
 }
 
-void reveal_map(int y, int x, int reveal_size, Map *map) {
+void RevealMap(int y, int x, int reveal_size, Map *map) {
   // Find bounds left -> you get how much right
   // Find bounds up -> you get how much below
 
