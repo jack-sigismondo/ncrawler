@@ -1,8 +1,6 @@
-#include <ncurses.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include <ncurses.h>
 
 #include "map.h"
 
@@ -70,9 +68,13 @@ void ReadMap(Map *map, char *file_name) {
   strcat(file_path, ".txt");
 
   FILE *file_ptr = fopen(file_path, "r");
+  if (file_ptr == NULL) {
+    printf("Error: Could not find file");
+    return;
+  }
 
   int ch; // NOTE This is an int to handle EOF
-
+  
   int x = 0;
   int y = 0;
 

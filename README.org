@@ -1,0 +1,22 @@
+* to be completed eventually
+cmake -S . -B build
+cmake --build build
+
+
+* TODO
+** TODO refactor graphics files into other folders
+** TODO a mouse pet that eats rats (stops mice from doing damage behid you)
+** TODO implement a hash map for entities
+How?
+Create fillable array
+How to handle duplicates?
+linked list enabled with duplicates ??? or check online
+
+* Note
+artist-mode and whitespace-mode are great for adding graphics
+
+
+* Sources (ASCII art)
+https://www.asciiart.eu/collections
+https://asciiart.website/browse.php
+https://ascii.co.uk/art/brickwall

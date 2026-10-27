@@ -36,6 +36,10 @@ void GenerateMap(Map *map, int multiplier);
 // Take a map and print it's arr
 void PrintMap(Map *map, int map_follows_player);
 
+void PrintAtMap(int y, int x, char c);
+
+void ReadMap(Map *map, char *file_name);
+
 // Take a char and print it on a map coord
 void PrintAtMap(int y, int x, char c);
 

@@ -1,9 +1,7 @@
 #include <ncurses.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-#include "graphics.h"
 #include "logic.h"
+#include "graphics.h"
 #include "map.h"
 
 int entity_count = 0;

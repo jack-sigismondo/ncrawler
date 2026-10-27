@@ -1,7 +1,7 @@
-#include "graphics.h"
 #include <ncurses.h>
-#include <stdlib.h>
 #include <string.h>
+
+#include "graphics.h"
 
 void PrintDebugString(char *string) {
   mvaddstr(30, 2, "The string you entered is:");
@@ -28,6 +28,7 @@ void PrintGraphic(int y, int x, char *file_name) {
 
   if (file_ptr == NULL) {
     printf("Error: Could not find file");
+    return;
   }
 
   int ch; // NOTE This is an int to handle EOF
@@ -100,7 +101,7 @@ void PrintBorderDungeon() {
   mvaddch(0, 120, '|');
 }
 
-void print_border() {
+void PrintBorder() {
 
   for (int x = 0; x < 120; ++x) {
 

@@ -1,6 +1,5 @@
-ncrawler
-tags
-todo.txt
+build
+.gdb_history
 
-supplementary/*
+tags
 ncrawler.dSYM

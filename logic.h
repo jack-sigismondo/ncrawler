@@ -1,11 +1,23 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
+#include "map.h"
+
 // TODO Interact button that does something based on what the entity is
 
 
-// An entity is everything besides maybe the player and map spaces. It is keys, enemies, levers, maybe even spots on the map
-typedef struct Entity {
+// An entity is everything besides maybe the player and map spaces. It is keys,
+// enemies, levers, maybe even spots on the map
+
+typedef enum EntityCode {
+
+  E_SKULL,
+  E_SKULLSHOOTER,
+  E_MOUSE,  
+  E_SPIDER,
+} EntityCode;
+
+typedef struct Entity { // FIXME
 	int id;
 	int type;
 	char name[20];
@@ -46,5 +58,12 @@ typedef struct Key { // Could maybe go on a wall
 
 } Key;
 
+Player CreatePlayer(int difficulty);
+
+void UpdateEntitiesFromMap(Map *map, Player *player /* entities */);
+
+int MovePlayer(Map *map, Player *player, int keypress);
+
+void PrintEnvironment(Map *map, Player *player);
 
 #endif // LOGIC_H

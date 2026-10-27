@@ -1,21 +1,14 @@
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 #include "graphics.h"
+#include "arrow.h"
 
-typedef struct Runner {
-  int y;
-  int x;
-  int hp;
+// TODO name actually player objects 'player'
 
-  char *graphic;
-
-} Runner;
-
-Runner CreateRunner(int hp) {
-  Runner runner;
+struct runner CreateRunner(int hp) {
+  struct runner runner;
   runner.y = 39;
   runner.x = 61;
   runner.hp = 100;
@@ -23,16 +16,6 @@ Runner CreateRunner(int hp) {
 
   return runner;
 }
-
-typedef struct Arrow {
-  int y;
-  int x;
-
-  int speed;
-
-  char *graphic;
-
-} Arrow;
 
 Arrow CreateArrow(int delay,
                    int location) { // delay = int * 100 iterations worth of wait
@@ -57,7 +40,7 @@ void ResetArrow(Arrow *arrow, int difficulty) {
 
 // Check if the arrow is hitting the player or floor
 // 0 for neither, 1 for player, 2 for floor
-int CheckArrow(Arrow *arrow, Runner *runner) { // TODO
+int CheckArrow(Arrow *arrow, struct runner *runner) { // TODO
 
   // arrow reaches head height
   if (arrow->y >= 30) { // TODO change to runner's height
@@ -85,10 +68,9 @@ void ArrowStart(int difficulty) {
 
   int ch;
   halfdelay(1); // NOTE
-  srand(time(NULL));
   clear();
 
-  Runner runner = CreateRunner(100);
+  struct runner runner = CreateRunner(100);
 
   Arrow quiver[8];
   for (int i = 0; i < 8; ++i) { // HACK
