@@ -11,6 +11,7 @@ How?
 Create fillable array
 How to handle duplicates?
 linked list enabled with duplicates ??? or check online
+** TODO Add a legend keybind for the map
 
 * Note
 artist-mode and whitespace-mode are great for adding graphics

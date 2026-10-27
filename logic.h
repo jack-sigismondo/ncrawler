@@ -9,32 +9,30 @@
 // An entity is everything besides maybe the player and map spaces. It is keys,
 // enemies, levers, maybe even spots on the map
 
-typedef enum EntityCode {
-
-  E_SKULL,
-  E_SKULLSHOOTER,
-  E_MOUSE,  
-  E_SPIDER,
+typedef enum EntityCode
+{
+    E_SKULL,
+    E_SKULLSHOOTER,
+    E_MOUSE,  
+    E_SPIDER,
 } EntityCode;
 
 typedef struct Entity { // FIXME
-	int id;
-	int type;
-	char name[20];
-	char description[30];
-
-	void *object;
+    int id;
+    int type;
+    char name[20];
+    char description[30];
+    void *object;
 
 } Entity;
 
 typedef enum EntityType { // FIXME
 	E_PLAYER,
 	E_KEY,
-
 } EntityType;
 
-
-typedef struct Player {
+typedef struct Player
+{
 
 	char name[15];
 	int hp;
@@ -49,8 +47,8 @@ typedef struct Player {
 	// Armor (in strings and int array)
 } Player;
 
-
-typedef struct Key { // Could maybe go on a wall
+typedef struct key // TODO remove
+{
 	int init_coord[2];
 	int unlock_coord[2];
 
@@ -58,12 +56,16 @@ typedef struct Key { // Could maybe go on a wall
 
 } Key;
 
-Player CreatePlayer(int difficulty);
+Player
+CreatePlayer(int difficulty);
 
-void UpdateEntitiesFromMap(Map *map, Player *player /* entities */);
+void
+UpdateEntitiesFromMap(Map *map, Player *player /* entities */);
 
-int MovePlayer(Map *map, Player *player, int keypress);
+int
+MovePlayer(Map *map, Player *player, int keypress);
 
-void PrintEnvironment(Map *map, Player *player);
+void
+PrintEnvironment(Map *map, Player *player);
 
 #endif // LOGIC_H

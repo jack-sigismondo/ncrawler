@@ -7,34 +7,35 @@
 
 enum weapons { W_SWORD, W_KATANA, W_BOW, W_ };
 
-typedef struct Fighter {
+typedef struct Fighter
+{
 
-  int y;
-  int x;
+    int y;
+    int x;
 
-  int weapon;
-  char *graphic;
+    int weapon;
+    char *graphic;
 
-  // 0 1 2
-  // 3 4 5
-  int position;
+    // 0 1 2
+    // 3 4 5
+    int position;
 
-  int timeout;
+    int timeout;
 
-  int hp;
-    
+    int hp;
+        
 } Fighter; // FIXME
 
-
-typedef struct Enemy {  // FIXME
-  int name;
-  int y;
-  int x;  
-  
-  int direction; // nesw
-  char *graphic;
-  char *graphic_projectile;
-  int alive;  
+typedef struct Enemy // FIXME
+{
+    int name;
+    int y;
+    int x;    
+    
+    int direction; // nesw
+    char *graphic;
+    char *graphic_projectile;
+    int alive;    
 } Enemy;
 
 // Swing your fighter's weapon, kill monsters and enact a swing timeout

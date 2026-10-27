@@ -3,142 +3,140 @@
 
 #include "graphics.h"
 
-void PrintDebugString(char *string) {
-  mvaddstr(30, 2, "The string you entered is:");
-  mvaddstr(31, 2, string);
+void
+PrintDebugString(char *string)
+{
+    mvaddstr(30, 2, "The string you entered is:");
+    mvaddstr(31, 2, string);
 }
 
-void PrintDebugInt(int num) {
-  mvaddstr(32, 2, "The number you entered is:");
-  char string[10];
-  snprintf(string, sizeof(string), "%d", num);
-  mvaddstr(33, 2, string);
+void
+PrintDebugInt(int num)
+{
+    mvaddstr(32, 2, "The number you entered is:");
+    char string[10];
+    snprintf(string, sizeof(string), "%d", num);
+    mvaddstr(33, 2, string);
 }
 
-void PrintGraphic(int y, int x, char *file_name) {
+void
+PrintGraphic(int y, int x, char *file_name)
+{
+    int init_x = x;
+    // Sandwich file_name with the folder and .txt
+    char file_path[200] = "graphics/";
+    strcat(file_path, file_name);
+    strcat(file_path, ".txt");
+    // Check for typos/errors.
+    FILE *file_ptr = fopen(file_path, "r");
+    if (file_ptr == NULL)
+    {
+	printf("Error: Could not find file");
+	return;
+    }
+    // Read the file char by char.
+    int ch; // NOTE This is an int to handle EOF.
+    while ((ch = fgetc(file_ptr)) != EOF)
+    {
+	if (ch == '\n')
+	{
+	    x = init_x;
+	    y += 1;
+	}
+	else
+	    mvaddch(y, x++, ch);
+    }
+    fclose(file_ptr);
+}
 
-  int init_x = x;
+void
+PrintBorderDungeon()
+{
+    for (int x = 0; x < 120; ++x) {
+	// Top bar
+	mvaddch(0, x, '|');
+	// Middle bar
+	mvaddch(28, x, '|');
+	// Bottom bar
+	mvaddch(50, x, '|');
 
-  // sandwich file_name with the folder and .txt
-  char file_path[200] = "graphics/";
-  strcat(file_path, file_name);
-  strcat(file_path, ".txt");
+	// Advance the cursor.
+	x += 1;
 
-  FILE *file_ptr = fopen(file_path, "r");
-
-  if (file_ptr == NULL) {
-    printf("Error: Could not find file");
-    return;
-  }
-
-  int ch; // NOTE This is an int to handle EOF
-  while ((ch = fgetc(file_ptr)) != EOF) {
-
-    if (ch == '\n') {
-      x = init_x;
-      y += 1;
+	// Top bar
+	mvaddch(0, x, '-');
+	// Middle bar
+	mvaddch(28, x, '-');
+	// Bottom bar
+	mvaddch(50, x, '-');
     }
 
-    else {
-      mvaddch(y, x++, ch);
+    for (int y = 1; y < 51; ++y)
+    {
+	// Left bar
+	mvaddch(y, 0, '-');
+	mvaddch(y, 1, '|');
+	// Middle bar
+	mvaddch(y, 75, '|');
+	mvaddch(y, 76, '-');
+	// Right bar
+	mvaddch(y, 119, '|');
+	mvaddch(y, 120, '-');
+
+	// Advance the cursor.
+	y += 1;
+
+	// Left bar
+	mvaddch(y, 0, '|');
+	mvaddch(y, 1, '-');
+	// Middle bar
+	mvaddch(y, 75, '-');
+	mvaddch(y, 76, '|');
+	// Right bar
+	mvaddch(y, 119, '-');
+	mvaddch(y, 120, '|');
     }
-  }
-
-  fclose(file_ptr);
+    // -.-
+    mvaddch(0, 120, '|');
 }
 
-void PrintBorderDungeon() {
+void
+PrintBorder()
+{
+    for (int x = 0; x < 120; ++x)
+    {
+	// Top bar
+	mvaddch(0, x, '|');
+	// Bottom bar
+	mvaddch(50, x, '|');
 
-  for (int x = 0; x < 120; ++x) {
+	// Advance the cursor
+	x += 1;
 
-    // Top bar
-    mvaddch(0, x, '|');
-    // Middle bar
-    mvaddch(28, x, '|');
-    // Bottom bar
-    mvaddch(50, x, '|');
-
-    // Advance the cursor
-    x += 1;
-
-    // Top bar
-    mvaddch(0, x, '-');
-    // Middle bar
-    mvaddch(28, x, '-');
-    // Bottom bar
-    mvaddch(50, x, '-');
-  }
-
-  for (int y = 1; y < 51; ++y) {
-
-    // Left bar
-    mvaddch(y, 0, '-');
-    mvaddch(y, 1, '|');
-
-    // Middle bar
-    mvaddch(y, 75, '|');
-    mvaddch(y, 76, '-');
-
-    // Right bar
-    mvaddch(y, 119, '|');
-    mvaddch(y, 120, '-');
-
-    ++y;
-
-    // Left bar
-    mvaddch(y, 0, '|');
-    mvaddch(y, 1, '-');
-
-    // Middle bar
-    mvaddch(y, 75, '-');
-    mvaddch(y, 76, '|');
-
-    // Right bar
-    mvaddch(y, 119, '-');
-    mvaddch(y, 120, '|');
-  }
-
-  mvaddch(0, 120, '|');
-}
-
-void PrintBorder() {
-
-  for (int x = 0; x < 120; ++x) {
-
-    // Top bar
-    mvaddch(0, x, '|');
-    // Bottom bar
-    mvaddch(50, x, '|');
-
-    // Advance the cursor
-    x += 1;
-
-    // Top bar
-    mvaddch(0, x, '-');
-    // Bottom bar
-    mvaddch(50, x, '-');
-  }
-
-  for (int y = 1; y < 51; ++y) {
-
-    // Left bar
-    mvaddch(y, 0, '-');
-    mvaddch(y, 1, '|');
-
-    // Right bar
-    mvaddch(y, 119, '|');
-    mvaddch(y, 120, '-');
-
-    ++y;
-
-    // Left bar
-    mvaddch(y, 0, '|');
-    mvaddch(y, 1, '-');
-
-    // Right bar
-    mvaddch(y, 119, '-');
-    mvaddch(y, 120, '|');
-  }
-
-  mvaddch(0, 120, '|');
+	// Top bar
+	mvaddch(0, x, '-');
+	// Bottom bar
+	mvaddch(50, x, '-');
+    }
+    for (int y = 1; y < 51; ++y)
+    {
+	// Left bar
+	mvaddch(y, 0, '-');
+	mvaddch(y, 1, '|');
+	// Right bar
+	mvaddch(y, 119, '|');
+	mvaddch(y, 120, '-');
+	
+	// Advance the cursor.
+	y += 1;
+	
+	// Left bar
+	mvaddch(y, 0, '|');
+	mvaddch(y, 1, '-');
+	// Right bar
+	mvaddch(y, 119, '-');
+	mvaddch(y, 120, '|');
+    }
+    // -.-
+    mvaddch(0, 120, '|');
 }
