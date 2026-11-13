@@ -4,22 +4,6 @@
 #include "graphics.h"
 
 void
-PrintDebugString(char *string)
-{
-    mvaddstr(30, 2, "The string you entered is:");
-    mvaddstr(31, 2, string);
-}
-
-void
-PrintDebugInt(int num)
-{
-    mvaddstr(32, 2, "The number you entered is:");
-    char string[10];
-    snprintf(string, sizeof(string), "%d", num);
-    mvaddstr(33, 2, string);
-}
-
-void
 PrintGraphic(int y, int x, char *file_name)
 {
     int init_x = x;
@@ -47,6 +31,38 @@ PrintGraphic(int y, int x, char *file_name)
 	    mvaddch(y, x++, ch);
     }
     fclose(file_ptr);
+}
+
+void
+get_graphic_sizes(int *height, int *width, char *file_name)
+{
+	// Sandwich file_name with the folder and .txt
+    char file_path[200] = "graphics/";
+    strcat(file_path, file_name);
+    strcat(file_path, ".txt");
+	
+	FILE *fp = fopen(file_path, "r");
+	if (fp == NULL)
+		return;
+
+	int ch;
+	*height = 0; // NOTE
+	*width = 0;
+	int max_width = 0;
+
+	while ((ch = fgetc(fp)) != EOF)
+	{
+		if (ch == '\n')
+		{
+			*height += 1;
+			if (*width > max_width)
+				max_width = *width;
+			*width = 0;
+		}
+		else
+			*width += 1;
+	}
+	*width = max_width;
 }
 
 void
